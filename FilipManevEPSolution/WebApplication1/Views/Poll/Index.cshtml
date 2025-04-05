@@ -1,0 +1,16 @@
+﻿@model IEnumerable<WebApplication1.Domain.Models.Poll>
+
+@{
+    ViewData["Title"] = "Polls";
+}
+
+<h2>Polls</h2>
+<ul>
+    @foreach (var poll in Model)
+    {
+        <li>
+            <a asp-controller="Poll" asp-action="Details" asp-route-id="@poll.Id">@poll.Title</a>
+            (Created on @poll.DateCreated.ToLocalTime().ToString("g"))
+        </li>
+    }
+</ul>

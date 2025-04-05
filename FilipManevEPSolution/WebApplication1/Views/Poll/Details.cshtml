@@ -1,0 +1,53 @@
+﻿
+@model WebApplication1.Domain.Models.Poll
+@{
+    ViewData["Title"] = "Poll Details";
+}
+
+<h2>@Model.Title</h2>
+
+<form asp-action="Vote" method="post">
+    <input type="hidden" name="pollId" value="@Model.Id" />
+    <div>
+        <input type="radio" name="optionVoted" value="1" id="option1" />
+        <label for="option1">@Model.Option1Text (@Model.Option1VotesCount votes)</label>
+    </div>
+    <div>
+        <input type="radio" name="optionVoted" value="2" id="option2" />
+        <label for="option2">@Model.Option2Text (@Model.Option2VotesCount votes)</label>
+    </div>
+    <div>
+        <input type="radio" name="optionVoted" value="3" id="option3" />
+        <label for="option3">@Model.Option3Text (@Model.Option3VotesCount votes)</label>
+    </div>
+    <button type="submit">Vote</button>
+</form>
+
+<div>
+    <canvas id="pollChart"></canvas>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        var ctx = document.getElementById('pollChart').getContext('2d');
+        var pollChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['@Model.Option1Text', '@Model.Option2Text', '@Model.Option3Text'],
+                datasets: [{
+                    label: 'Votes',
+                    data: [@Model.Option1VotesCount, @Model.Option2VotesCount, @Model.Option3VotesCount],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+}

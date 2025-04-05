@@ -1,0 +1,26 @@
+﻿@model WebApplication1.Domain.Models.Poll
+@{
+    ViewData["Title"] = "Create Poll";
+}
+
+<h2>Create a New Poll</h2>
+
+<form asp-action="Create" method="post">
+    <div>
+        <label asp-for="Title"></label>
+        <input asp-for="Title" />
+    </div>
+    <div>
+        <label asp-for="Option1Text"></label>
+        <input asp-for="Option1Text" />
+    </div>
+    <div>
+        <label asp-for="Option2Text"></label>
+        <input asp-for="Option2Text" />
+    </div>
+    <div>
+        <label asp-for="Option3Text"></label>
+        <input asp-for="Option3Text" />
+    </div>
+    <button type="submit">Create Poll</button>
+</form>
